@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Chart</title>
+    <script type="text/javascript" src="/ui/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="js/bar.js"></script>
+     <script>
+         $(document).ready(function () {
+             $('#chart').Chart({
+                 pading: { top : 30 },
+                 data: {
+                    title: "Bar Chart",
+                     ratio: 'Millions',
+                     category: ["Human", "Chimp", "Dolphin", "Cat", "Pig", "Horse"],
+                     value: [11000, 6200, 5800, 300, 2000, 4500],
+                 },
+
+             });
+         });
+     </script>
+</head>
+<body>
+    <div id="chart">
+
+    </div>
+</body>
+</html>

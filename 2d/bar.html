@@ -1,0 +1,82 @@
+﻿<html>
+<head>
+    <title>Bar Graph</title>
+    <script type="text/javascript">
+        var can, ctx,
+            minVal, maxVal,
+            xscale, yscale,
+             categoies, y;
+        // data sets -- set literally or obtain from an ajax call
+        var catagory_axis = [ "Human", "Chimp", "Dolphin", "Cat" ];
+        var dataValue = [ 11000, 6200, 5800, 300 ];
+
+        function init() {
+            // set these values for your data
+            categoies = dataValue.length;
+            maxVal = 12000;
+            var stepSize = 1000;
+            var value_axis = 50;
+            var ratio_heigh = 60;
+            var margin = 10;
+            var value_ratio = "Millions"
+
+            can = document.getElementById("can");
+            ctx = can.getContext("2d");
+            ctx.fillStyle = "black"
+            yscale = (can.height - value_axis - margin) / (maxVal);
+            xscale = (can.width - ratio_heigh) / ( categoies + 1);
+            ctx.strokeStyle = "rgba(128,128,255, 0.5)"; // light blue line
+            ctx.beginPath();
+            // print  column value_ratio
+            ctx.font = "14pt Helvetica"
+            ctx.fillText(value_ratio, 0, value_axis - margin);
+            // print row value_ratio and draw horizontal grid lines
+            ctx.font = "12pt Helvetica"
+
+            //draw scale
+            var count =  0;
+            for (scale = maxVal; scale >= 0; scale -= stepSize) {
+                y = value_axis + (yscale * count * stepSize);
+                ctx.fillText(scale, margin,y + margin);
+                ctx.moveTo(ratio_heigh, y)
+                ctx.lineTo(can.width, y)
+                count++;
+            }
+            ctx.stroke();
+
+            // label samples
+            ctx.font = "14pt Helvetica";
+            ctx.textBaseline = "bottom";
+            for (i = 0; i < 4; i++) {
+                calcY(dataValue[i]);
+                ctx.fillText(catagory_axis[i], xscale * (i + 1), y - margin);
+            }
+
+            // set a color and a shadow
+            ctx.fillStyle = "green";
+            ctx.shadowColor = 'rgba(128,128,128, 0.5)';
+            ctx.shadowOffsetX = 20;
+            ctx.shadowOffsetY = 1;
+            //// translate to bottom of graph and scale x,y to match data
+            ctx.translate(0, can.height - margin);
+            ctx.scale(xscale, -1 * yscale);
+           
+            // draw bars
+            for (i = 0; i < 4; i++) {
+                   ctx.fillRect(i + 1, 0, 0.5, dataValue[i]);
+            }
+        }
+
+        function calcY(value) {
+            y = can.height - value * yscale;
+        }
+    </script>
+</head>
+<body onload="init()">
+    <div align="center">
+        <h2>Bar Chart</h2>
+        <canvas id="can" height="400" width="650">
+        </canvas>
+    </div>
+</body>
+</html>

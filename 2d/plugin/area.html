@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Chart</title>
+    <script type="text/javascript" src="/ui/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="js/area.js"></script>
+     <script>
+         $(document).ready(function () {
+             $('#chart').Chart({
+                 margin: { right: 0, bottom: 30 },
+                 data: {
+                     title: "Area Chart",
+                     category: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
+                         "Sep", "Oct", "Nov", "Dec"],
+                     value: [-10, -20, 0, 50, 50, 60, 90, 100, 50, 40, 30, 0],
+                 },
+                 
+
+             });
+         });
+     </script>
+</head>
+<body>
+    <div id="chart" style="float: left; position:relative;">
+
+    </div>
+    <div id="id-leg" style="margin-top:50px; float: left; position:relative;"></div>
+</body>
+</html>
